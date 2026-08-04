@@ -1,0 +1,71 @@
+{
+  "brand": {
+    "name": "Akcent",
+    "tagline": "Screen Printing & Advertising"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "gallery": "Gallery",
+    "contacts": "Contacts"
+  },
+  "home": {
+    "heroTitle": "Professional advertising and design for your business. Our own printing house. Competitive prices.",
+    "heroSubtitle": "Direct printing on business cards, t-shirts, jackets, workwear, souvenirs, lighters, pens, notebooks, calendars, bags, caps, sweatshirts, sportswear and badge lanyards. Vehicle branding. Outdoor advertising and more.",
+    "ctaText": "Secure your success by getting in touch with <link>us</link> now!",
+    "services": {
+      "screenPrinting": "Screen Printing",
+      "vehicleBranding": "Vehicle Branding",
+      "outdoorAdvertising": "Outdoor Advertising"
+    }
+  },
+  "gallery": {
+    "screenPrinting": "Screen Printing",
+    "vehicleBranding": "Vehicle Branding",
+    "outdoorAdvertising": "Outdoor Advertising",
+    "empty": "There are no images in this gallery yet."
+  },
+  "about": {
+    "tabs": {
+      "about": "About us",
+      "screenPrinting": "Screen Printing",
+      "vehicleBranding": "Vehicle Branding",
+      "outdoorAdvertising": "Outdoor Advertising"
+    },
+    "about": "Akcent agency was founded in 2010 by a team of professionals with many years of experience in advertising. Our main activities are screen printing (direct printing on all kinds of textiles and promotional materials), vehicle branding and outdoor advertising. Our attention is entirely focused on the needs, ideas, wishes and vision of the client. Set out on the path to success with us now!",
+    "screenPrinting": "Screen printing is a technology that allows direct printing on textiles (t-shirts, workwear, caps, bags, backpacks, etc.), lighters, pens, mugs, thermoses, calendars, business cards and ashtrays. Thanks to this we can print your ideas onto almost any surface, turning them into your advertising.",
+    "vehicleBranding": "Advertising is a mirror of your business — and what could be better than advertising that works for you around the clock: on the way to work, on holiday or at a party. Show the world your ideas with the help of our experience.",
+    "outdoorAdvertising": "This is the way to be noticed and stand out! Deliver your advertising message through attractive storefronts, illuminated signs, panels or billboards. Add colour to your business with creative outdoor advertising!"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "contacts": {
+    "title": "Get in touch",
+    "address": "44 Han Krum St, 8000 Vazrazhdane district, Burgas",
+    "phones": "+359 887 816 205, +359 886 838 897",
+    "email": "akcent_34@abv.bg"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "footer": {
+    "copyright": "Coloris Design, Copyright © {year}"
+  },
+  "admin": {
+    "loginTitle": "Administrator Login",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "dashboardTitle": "Manage Galleries",
+    "upload": "Upload image",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this image?",
+    "caption": "Caption (optional)",
+    "uploading": "Uploading...",
+    "invalidCredentials": "Invalid email or password."
+  }
+}
