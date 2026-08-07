@@ -32,7 +32,7 @@ export function GalleryGrid({
   }
 
   const slides = images.map((img) => ({
-    src: imageUrl(img.storage_path, { width: 1600, quality: 80 }),
+    src: imageUrl(img.storage_path),
     alt: img.caption ?? "",
   }));
 
@@ -47,7 +47,7 @@ export function GalleryGrid({
             className="group relative aspect-square overflow-hidden rounded-lg"
           >
             <Image
-              src={imageUrl(img.storage_path, { width: 400, height: 400, quality: 70 })}
+              src={imageUrl(img.storage_path)}
               alt={img.caption ?? ""}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
