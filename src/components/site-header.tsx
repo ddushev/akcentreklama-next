@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { LogOut, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -19,8 +20,32 @@ const NAV = [
 export function SiteHeader() {
   const t = useTranslations("nav");
   const tBrand = useTranslations("brand");
+  const tAdmin = useTranslations("admin");
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Track auth state so the Sign out control appears only for a logged-in admin
+  // and updates reactively after login/logout (no manual reload needed).
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => setIsAdmin(Boolean(data.user)));
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) =>
+      setIsAdmin(Boolean(session?.user)),
+    );
+    return () => subscription.unsubscribe();
+  }, []);
+
+  async function signOut() {
+    setOpen(false);
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.replace("/");
+    router.refresh();
+  }
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href.split("/").slice(0, 2).join("/"));
@@ -54,6 +79,17 @@ export function SiteHeader() {
           <div className="ml-2 flex items-center">
             <LanguageSwitcher />
             <ThemeToggle />
+            {isAdmin && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={signOut}
+                className="ml-1 text-white hover:bg-white/10 hover:text-white"
+              >
+                <LogOut className="h-4 w-4" />
+                {tAdmin("signOut")}
+              </Button>
+            )}
           </div>
         </nav>
 
@@ -90,6 +126,16 @@ export function SiteHeader() {
                 {t(item.key)}
               </Link>
             ))}
+            {isAdmin && (
+              <button
+                type="button"
+                onClick={signOut}
+                className="flex items-center gap-2 py-3 text-left text-sm font-bold uppercase transition-colors hover:text-brand-green"
+              >
+                <LogOut className="h-4 w-4" />
+                {tAdmin("signOut")}
+              </button>
+            )}
           </div>
         </nav>
       )}

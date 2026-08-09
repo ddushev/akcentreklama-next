@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { type NextRequest } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { createServerClient } from "@supabase/ssr";
 import { routing } from "@/i18n/routing";
@@ -28,18 +28,11 @@ export async function middleware(request: NextRequest) {
     },
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  // 3. Protect the dashboard: unauthenticated users are sent to /admin (login).
-  const { pathname } = request.nextUrl;
-  const isDashboard = /^\/(bg|en|ru)?\/?dashboard(\/|$)/.test(pathname);
-  if (isDashboard && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/admin";
-    return NextResponse.redirect(url);
-  }
+  // 3. Refresh the session cookie by reading the user. There are no
+  //    middleware-protected routes: /admin is the public login screen and the
+  //    gallery pages are public — they simply render extra admin controls when
+  //    a session exists (checked server-side on the page itself).
+  await supabase.auth.getUser();
 
   return response;
 }
