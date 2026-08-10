@@ -63,6 +63,7 @@
     "dashboardTitle": "Manage Galleries",
     "upload": "Upload image",
     "delete": "Delete",
+    "deleted": "Image deleted",
     "confirmDelete": "Are you sure you want to delete this image?",
     "caption": "Caption (optional)",
     "uploading": "Uploading...",
