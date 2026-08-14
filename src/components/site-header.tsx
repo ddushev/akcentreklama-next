@@ -78,7 +78,7 @@ export function SiteHeader() {
           ))}
           <div className="ml-2 flex items-center">
             <LanguageSwitcher />
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             {isAdmin && (
               <Button
                 variant="ghost"
@@ -96,7 +96,7 @@ export function SiteHeader() {
         {/* Mobile controls */}
         <div className="flex items-center md:hidden">
           <LanguageSwitcher />
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
           <Button
             variant="ghost"
             size="icon"
