@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import Image from "next/image";
 import { Printer, Car, Megaphone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HomeCta } from "@/components/home-cta";
@@ -21,8 +22,18 @@ export default async function HomePage({
   return (
     <>
       {/* Hero */}
-      <section className="relative flex min-h-[70vh] items-center justify-center bg-primary px-4 py-20 text-center text-white">
-        <div className="mx-auto max-w-4xl space-y-6">
+      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-4 py-20 text-center text-white">
+        <Image
+          src="/images/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-bottom"
+        />
+        {/* Dark gradient overlay keeps the heading readable over the photo. */}
+        <div className="absolute inset-0 bg-linear-to-b from-primary/70 to-black/60" />
+        <div className="relative mx-auto max-w-4xl space-y-6">
           <h1
             className="text-3xl font-bold leading-tight sm:text-4xl"
             style={{ textShadow: "0 0 30px var(--brand-green)" }}

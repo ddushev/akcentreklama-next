@@ -11,25 +11,32 @@ export default async function ContactsPage({
   const t = await getTranslations("contacts");
 
   return (
-    <div className="mx-auto w-[90%] max-w-6xl py-12">
-      <h1 className="mb-8 text-center text-2xl font-bold">{t("title")}</h1>
+    <section className="pb-16">
+      {/* Full-width image band. */}
+      <div
+        className="h-72 w-full bg-cover bg-center sm:h-96"
+        style={{ backgroundImage: "url(/images/contacts.jpg)" }}
+      />
 
-      <div className="grid gap-8 md:grid-cols-2">
-        <div className="space-y-6">
-          <ContactRow icon={<MapPin className="h-6 w-6 text-brand-green" />}>
+      {/* White card overlapping the lower part of the image. */}
+      <div className="mx-auto -mt-40 w-[90%] max-w-2xl rounded-xl bg-white text-neutral-900 shadow-xl sm:-mt-48">
+        <div className="flex flex-col items-center gap-6 px-6 py-10 text-center">
+          <h1 className="text-2xl font-bold italic">{t("title")}</h1>
+
+          <ContactItem icon={<MapPin className="h-7 w-7 text-brand-green" />}>
             {t("address")}
-          </ContactRow>
-          <ContactRow icon={<Phone className="h-6 w-6 text-brand-green" />}>
+          </ContactItem>
+          <ContactItem icon={<Phone className="h-7 w-7 text-brand-green" />}>
             {t("phones")}
-          </ContactRow>
-          <ContactRow icon={<Mail className="h-6 w-6 text-brand-green" />}>
+          </ContactItem>
+          <ContactItem icon={<Mail className="h-7 w-7 text-brand-green" />}>
             <a href={`mailto:${t("email")}`} className="hover:text-brand-green">
               {t("email")}
             </a>
-          </ContactRow>
+          </ContactItem>
         </div>
 
-        <div className="overflow-hidden rounded-xl border">
+        <div className="overflow-hidden rounded-b-xl">
           <iframe
             title="map"
             className="h-80 w-full"
@@ -39,11 +46,11 @@ export default async function ContactsPage({
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-function ContactRow({
+function ContactItem({
   icon,
   children,
 }: {
@@ -51,9 +58,9 @@ function ContactRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-4 rounded-lg border bg-card p-4">
+    <div className="flex flex-col items-center gap-2">
       {icon}
-      <span className="text-card-foreground">{children}</span>
+      <span className="italic">{children}</span>
     </div>
   );
 }

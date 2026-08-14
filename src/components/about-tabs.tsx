@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +11,14 @@ const TABS = [
   "vehicleBranding",
   "outdoorAdvertising",
 ] as const;
+
+// Background photo per tab (brought over from the original site).
+const TAB_IMAGE: Record<(typeof TABS)[number], string> = {
+  about: "/images/about-agency.jpg",
+  screenPrinting: "/images/about-screen-printing.jpg",
+  vehicleBranding: "/images/about-vehicle-branding.jpg",
+  outdoorAdvertising: "/images/about-outdoor-advertising.jpg",
+};
 
 export function AboutTabs() {
   const t = useTranslations("about");
@@ -35,8 +44,30 @@ export function AboutTabs() {
         ))}
       </div>
 
-      <div className="rounded-xl border bg-card p-8 text-lg leading-relaxed text-card-foreground">
-        {t(active)}
+      <div className="relative min-h-104 overflow-hidden rounded-xl border sm:min-h-128">
+        {TABS.map((tab) => (
+          <div
+            key={tab}
+            aria-hidden={tab !== active}
+            className={cn(
+              "absolute inset-0 flex items-center transition-opacity duration-700 ease-in-out",
+              tab === active ? "opacity-100" : "pointer-events-none opacity-0",
+            )}
+          >
+            <Image
+              src={TAB_IMAGE[tab]}
+              alt=""
+              fill
+              sizes="(max-width: 896px) 90vw, 896px"
+              className="object-cover"
+            />
+            {/* Dark overlay so the text stays readable over the photo. */}
+            <div className="absolute inset-0 bg-black/60" />
+            <p className="relative mx-auto max-w-3xl p-8 text-center text-xl leading-relaxed text-white sm:text-2xl">
+              {t(tab)}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

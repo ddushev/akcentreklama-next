@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Акцент — Ситопечат и реклама",
   description:
     "Професионална реклама и дизайн за вашия бизнес. Собствена печатница.",
-  icons: { icon: "/favicon.png" },
+  icons: { icon: "/icon.png" },
 };
 
 // The root layout is intentionally minimal; the real <html>/<body> live in
