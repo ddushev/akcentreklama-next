@@ -25,8 +25,43 @@ export function AboutTabs() {
   const [active, setActive] = useState<(typeof TABS)[number]>("about");
 
   return (
-    <div className="mx-auto w-[90%] max-w-4xl py-12">
-      <div className="mb-8 flex flex-wrap justify-center gap-2">
+    <div className="flex min-h-[calc(100vh-6.5rem)] w-full flex-col">
+      {/* Full-bleed image area filling the space above the buttons. */}
+      <div className="relative flex flex-1 flex-col overflow-hidden">
+        {TABS.map((tab) => (
+          <div
+            key={tab}
+            aria-hidden={tab !== active}
+            className={cn(
+              "flex items-center transition-opacity duration-700 ease-in-out",
+              tab === active
+                ? "relative flex-1 opacity-100"
+                : "absolute inset-0 pointer-events-none opacity-0",
+            )}
+          >
+            <Image
+              src={TAB_IMAGE[tab]}
+              alt=""
+              fill
+              sizes="100vw"
+              priority={tab === "about"}
+              className="object-cover"
+            />
+            {/* Dark overlay so the text stays readable over the photo. */}
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="relative mx-auto max-w-5xl px-6 py-10 text-center text-white">
+              {/* Visually-hidden page heading for SEO / screen readers. */}
+              <h1 className="sr-only">{t(`tabs.${tab}`)}</h1>
+              <p className="text-2xl leading-relaxed sm:text-3xl md:text-4xl">
+                {t(tab)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Tab buttons below the image, above the footer (like the old site). */}
+      <div className="flex flex-wrap justify-center gap-2 bg-primary p-4">
         {TABS.map((tab) => (
           <button
             key={tab}
@@ -35,38 +70,12 @@ export function AboutTabs() {
             className={cn(
               "rounded-full px-4 py-2 text-sm font-semibold transition-colors",
               active === tab
-                ? "bg-primary text-white"
-                : "bg-muted hover:bg-accent hover:text-accent-foreground",
+                ? "bg-brand-green text-primary"
+                : "bg-white/10 text-white hover:bg-white/20",
             )}
           >
             {t(`tabs.${tab}`)}
           </button>
-        ))}
-      </div>
-
-      <div className="relative min-h-104 overflow-hidden rounded-xl border sm:min-h-128">
-        {TABS.map((tab) => (
-          <div
-            key={tab}
-            aria-hidden={tab !== active}
-            className={cn(
-              "absolute inset-0 flex items-center transition-opacity duration-700 ease-in-out",
-              tab === active ? "opacity-100" : "pointer-events-none opacity-0",
-            )}
-          >
-            <Image
-              src={TAB_IMAGE[tab]}
-              alt=""
-              fill
-              sizes="(max-width: 896px) 90vw, 896px"
-              className="object-cover"
-            />
-            {/* Dark overlay so the text stays readable over the photo. */}
-            <div className="absolute inset-0 bg-black/60" />
-            <p className="relative mx-auto max-w-3xl p-8 text-center text-xl leading-relaxed text-white sm:text-2xl">
-              {t(tab)}
-            </p>
-          </div>
         ))}
       </div>
     </div>
