@@ -39,11 +39,11 @@ export function GalleryGrid({
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="group/gallery grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {images.map((img, i) => (
           <div
             key={img.id}
-            className="group relative aspect-square overflow-hidden rounded-lg"
+            className="group relative aspect-square overflow-hidden rounded-lg transition-all duration-200 ease-in-out group-has-[:hover]/gallery:opacity-60 hover:z-10 hover:scale-105 hover:rotate-2 hover:opacity-100 hover:shadow-[0_0_12px_rgba(0,0,0,0.5)]"
           >
             <button
               type="button"
@@ -56,7 +56,7 @@ export function GalleryGrid({
                 alt={img.caption ?? ""}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                className="object-cover transition-transform duration-200 group-hover:scale-105"
+                className="object-cover"
               />
             </button>
             {isAdmin && <DeleteImageButton image={img} />}
