@@ -49,10 +49,10 @@ export function AboutTabs() {
             />
             {/* Dark overlay so the text stays readable over the photo. */}
             <div className="absolute inset-0 bg-black/60" />
-            <div className="relative mx-auto max-w-5xl px-6 py-10 text-center text-white">
+            <div className="relative mx-auto max-w-2xl px-6 py-10 text-center text-white">
               {/* Visually-hidden page heading for SEO / screen readers. */}
               <h1 className="sr-only">{t(`tabs.${tab}`)}</h1>
-              <p className="text-2xl leading-relaxed sm:text-3xl md:text-4xl">
+              <p className="text-lg leading-relaxed sm:text-xl md:text-2xl">
                 {t(tab)}
               </p>
             </div>
