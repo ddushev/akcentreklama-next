@@ -39,7 +39,7 @@ export function GalleryGrid({
 
   return (
     <>
-      <div className="group/gallery grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="group/gallery grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {images.map((img, i) => (
           <div
             key={img.id}
@@ -48,14 +48,14 @@ export function GalleryGrid({
             <button
               type="button"
               onClick={() => setIndex(i)}
-              className="absolute inset-0 h-full w-full"
+              className="absolute inset-0 h-full w-full cursor-pointer"
               aria-label={img.caption ?? ""}
             >
               <Image
                 src={imageUrl(img.storage_path)}
                 alt={img.caption ?? ""}
                 fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="object-cover"
               />
             </button>
