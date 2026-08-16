@@ -1,0 +1,29 @@
+[build]
+  command = "next build"
+
+[build.environment]
+  # Next 16 / React 19 require Node 20+.
+  NODE_VERSION = "20"
+
+# --- 301 redirects from the old static site's URLs ---
+# Preserves search rankings and existing backlinks. The old gallery pages used
+# a flat `gallery-<name>` scheme; the new app uses `gallery/<slug>`. Note the
+# category rename: "outside-branding" -> "outdoor-advertising".
+
+[[redirects]]
+  from = "/gallery-screen-printing"
+  to = "/gallery/screen-printing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gallery-vehicle-branding"
+  to = "/gallery/vehicle-branding"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gallery-outside-branding"
+  to = "/gallery/outdoor-advertising"
+  status = 301
+  force = true
