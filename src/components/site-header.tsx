@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { LogOut, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
@@ -78,7 +77,6 @@ export function SiteHeader() {
           ))}
           <div className="ml-2 flex items-center">
             <LanguageSwitcher />
-            {/* <ThemeToggle /> */}
             {isAdmin && (
               <Button
                 variant="ghost"
@@ -96,7 +94,6 @@ export function SiteHeader() {
         {/* Mobile controls */}
         <div className="flex items-center md:hidden">
           <LanguageSwitcher />
-          {/* <ThemeToggle /> */}
           <Button
             variant="ghost"
             size="icon"
