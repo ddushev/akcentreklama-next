@@ -67,8 +67,9 @@ function encode(
  * format we'd have produced anyway — re-encoding those would spend a second
  * generation of lossy compression for nothing.
  *
- * Throws on undecodable input; callers should skip that file rather than fall
- * back to uploading the original, which would defeat the purpose.
+ * Throws on undecodable input, and on content still over MAX_BYTES at the
+ * quality floor. Callers should skip that file rather than fall back to
+ * uploading the original, which would defeat the purpose.
  */
 export async function prepareImageForUpload(file: File): Promise<PreparedImage> {
   let source: ImageBitmap;
@@ -151,6 +152,17 @@ export async function prepareImageForUpload(file: File): Promise<PreparedImage> 
 
     if (scaled !== source) scaled.close();
     if (!blob) throw new Error("could not be re-encoded");
+
+    // Still over budget at the quality floor. Below ~0.6 the artifacts become
+    // visible, so rather than shipping either an oversized file or a degraded
+    // one, refuse it and let the admin crop or simplify the image first.
+    if (blob.size > MAX_BYTES) {
+      throw new Error(
+        `still ${Math.round(blob.size / 1024)} KB at the lowest quality we accept ` +
+          `(limit ${Math.round(MAX_BYTES / 1024)} KB) — too detailed to compress, ` +
+          `try cropping it or exporting a simpler version`,
+      );
+    }
 
     return {
       blob,
