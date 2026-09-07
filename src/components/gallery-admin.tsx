@@ -20,6 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { prepareImageForUpload } from "@/lib/image-resize";
 import { cn } from "@/lib/utils";
 
 /** Turns an original filename into a safe, lowercase storage-path stem. */
@@ -30,13 +31,6 @@ function slugifyFileName(name: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
   return slug || "image";
-}
-
-/** File extension (lowercased) or a sensible default from the MIME type. */
-function extensionFor(file: File): string {
-  const match = file.name.match(/\.([^.]+)$/);
-  if (match) return match[1].toLowerCase();
-  return file.type === "image/png" ? "png" : "jpg";
 }
 
 /**
@@ -144,13 +138,30 @@ export function UploadZone({
 
       for (let i = 0; i < accepted.length; i++) {
         const file = accepted[i];
+
+        // Downscale and re-encode before upload. Failing here skips the file
+        // rather than falling back to the original — uploading a 4000px phone
+        // photo untouched is exactly what this guards against.
+        let prepared;
+        try {
+          prepared = await prepareImageForUpload(file);
+        } catch (err) {
+          toast.error(
+            `${file.name}: ${err instanceof Error ? err.message : "could not be processed"}`,
+          );
+          continue;
+        }
+
         const stem = slugifyFileName(file.name);
         const suffix = crypto.randomUUID().slice(0, 8);
-        const path = `${category}/${stem}-${suffix}.${extensionFor(file)}`;
+        const path = `${category}/${stem}-${suffix}.${prepared.extension}`;
 
         const { error: uploadError } = await supabase.storage
           .from(STORAGE_BUCKET)
-          .upload(path, file, { contentType: file.type, upsert: false });
+          .upload(path, prepared.blob, {
+            contentType: prepared.contentType,
+            upsert: false,
+          });
         if (uploadError) {
           toast.error(`${file.name}: ${uploadError.message}`);
           continue;
@@ -184,7 +195,7 @@ export function UploadZone({
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { "image/jpeg": [], "image/png": [] },
+    accept: { "image/jpeg": [], "image/png": [], "image/webp": [] },
     multiple: true,
     disabled: uploading,
   });
