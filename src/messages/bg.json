@@ -26,7 +26,8 @@
     "empty": "Все още няма изображения в тази галерия."
   },
   "about": {
-    "tabs": {
+    "viewGallery": "Към галерията",
+    "titles": {
       "about": "За нас",
       "screenPrinting": "Ситопечат",
       "vehicleBranding": "Брандиране на автомобили",

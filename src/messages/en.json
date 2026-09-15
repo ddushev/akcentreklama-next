@@ -26,7 +26,8 @@
     "empty": "There are no images in this gallery yet."
   },
   "about": {
-    "tabs": {
+    "viewGallery": "View gallery",
+    "titles": {
       "about": "About us",
       "screenPrinting": "Screen Printing",
       "vehicleBranding": "Vehicle Branding",

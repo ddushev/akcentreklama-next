@@ -26,7 +26,8 @@
     "empty": "В этой галерее пока нет изображений."
   },
   "about": {
-    "tabs": {
+    "viewGallery": "Смотреть галерею",
+    "titles": {
       "about": "О нас",
       "screenPrinting": "Шелкография",
       "vehicleBranding": "Брендирование автомобилей",
