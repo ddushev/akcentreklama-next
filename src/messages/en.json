@@ -10,13 +10,29 @@
     "contacts": "Contacts"
   },
   "home": {
-    "heroTitle": "Professional advertising and design for your business. Our own printing house. Competitive prices.",
+    "heroTitle": "Professional advertising and design for <accent>your business</accent>",
+    "contactUs": "Contact us",
+    "viewWork": "View our work",
+    "highlights": {
+      "ownPrintingHouse": "Our own printing house",
+      "competitivePrices": "Competitive prices",
+      "experience": "15+ years of experience"
+    },
+    "servicesEyebrow": "What we do",
+    "servicesTitle": "Everything your brand needs to get noticed",
+    "ctaTitle": "Have a project in mind?",
+    "ctaBody": "Tell us what you need and we'll get back to you with an offer.",
     "heroSubtitle": "Direct printing on business cards, t-shirts, jackets, workwear, souvenirs, lighters, pens, notebooks, calendars, bags, caps, sweatshirts, sportswear and badge lanyards. Vehicle branding. Outdoor advertising and more.",
     "ctaText": "Secure your success by getting in touch with <link>us</link> now!",
     "services": {
       "screenPrinting": "Screen Printing",
       "vehicleBranding": "Vehicle Branding",
       "outdoorAdvertising": "Outdoor Advertising"
+    },
+    "servicesDesc": {
+      "screenPrinting": "Printing on textiles, souvenirs and promotional materials.",
+      "vehicleBranding": "Advertising that works for you around the clock on the road.",
+      "outdoorAdvertising": "Storefronts, illuminated signs, panels and billboards."
     }
   },
   "gallery": {
