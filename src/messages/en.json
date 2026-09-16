@@ -23,7 +23,6 @@
     "ctaTitle": "Have a project in mind?",
     "ctaBody": "Tell us what you need and we'll get back to you with an offer.",
     "heroSubtitle": "Direct printing on business cards, t-shirts, jackets, workwear, souvenirs, lighters, pens, notebooks, calendars, bags, caps, sweatshirts, sportswear and badge lanyards. Vehicle branding. Outdoor advertising and more.",
-    "ctaText": "Secure your success by getting in touch with <link>us</link> now!",
     "services": {
       "screenPrinting": "Screen Printing",
       "vehicleBranding": "Vehicle Branding",
@@ -43,6 +42,9 @@
   },
   "about": {
     "viewGallery": "View gallery",
+    "headline": "Advertising that makes you stand out",
+    "servicesEyebrow": "Services",
+    "servicesTitle": "How we can help you",
     "titles": {
       "about": "About us",
       "screenPrinting": "Screen Printing",
