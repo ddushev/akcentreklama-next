@@ -58,6 +58,12 @@
   },
   "contacts": {
     "title": "Get in touch",
+    "intro": "Visit our office in Burgas or drop us a line — we reply quickly.",
+    "labels": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
     "address": "44 Han Krum St, 8000 Vazrazhdane district, Burgas",
     "phones": "+359 887 816 205, +359 886 838 897",
     "email": "akcent_34@abv.bg"
