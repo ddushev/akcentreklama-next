@@ -59,6 +59,7 @@
   "contacts": {
     "title": "Get in touch",
     "intro": "Visit our office in Burgas or drop us a line — we reply quickly.",
+    "openInMaps": "Open in Google Maps",
     "labels": {
       "address": "Address",
       "phone": "Phone",

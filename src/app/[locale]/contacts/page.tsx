@@ -1,8 +1,13 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
-import { MapPin, Phone, Mail } from "lucide-react";
-// Static import gives the banner an automatic blur placeholder while it loads.
+import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
+// Static imports give each picture an automatic blur placeholder while it loads.
 import contactsImage from "../../../../public/images/contacts.jpg";
+import mapImage from "../../../../public/images/map.jpg";
+
+// The agency's Google Maps place page (without Google's session tracking params).
+const MAP_LINK =
+  "https://www.google.com/maps/place/SCREEN+PRINTING+-+ADVERTISING-ACCENT/@42.4909515,27.4653886,17z/data=!3m1!4b1!4m6!3m5!1s0x40a694beba699433:0x27a38c0581088405!8m2!3d42.4909476!4d27.4679635!16s%2Fg%2F11dxdcg82t";
 
 export default async function ContactsPage({
   params,
@@ -79,15 +84,30 @@ export default async function ContactsPage({
           </ContactCard>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-2xl border bg-muted shadow-lg">
-          <iframe
-            title="map"
-            className="block h-[24rem] w-full sm:h-[28rem]"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=42.490929,27.468048&z=15&output=embed"
+        {/* A static picture of the map, linking out to Google Maps. The live embed
+            pulled in Google's scripts and only appeared a second or two late. */}
+        <a
+          href={MAP_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative mt-10 block overflow-hidden rounded-2xl border bg-muted shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <Image
+            src={mapImage}
+            alt=""
+            placeholder="blur"
+            sizes="(min-width: 1200px) 1152px, 100vw"
+            className="h-96 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-112"
           />
-        </div>
+          <span className="absolute right-4 bottom-4 inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 font-semibold text-primary-foreground shadow-lg transition-colors group-hover:bg-primary/85">
+            {t("openInMaps")}
+            <ExternalLink className="size-4" aria-hidden />
+          </span>
+          {/* Google requires the attribution to stay visible on map screenshots. */}
+          <span className="absolute bottom-1 left-2 text-xs text-neutral-600">
+            Map data ©2026 Google
+          </span>
+        </a>
       </section>
     </>
   );
