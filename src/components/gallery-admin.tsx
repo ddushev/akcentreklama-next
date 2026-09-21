@@ -204,7 +204,7 @@ export function UploadZone({
     <div
       {...getRootProps()}
       className={cn(
-        "flex aspect-square cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border p-3 text-center text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground",
+        "flex aspect-square cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border p-3 text-center text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground",
         isDragActive && "border-primary bg-primary/5 text-foreground",
         uploading && "pointer-events-none opacity-70",
       )}
