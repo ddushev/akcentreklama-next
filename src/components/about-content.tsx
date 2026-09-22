@@ -15,16 +15,21 @@ const SERVICES = [
     key: "screenPrinting",
     href: "/gallery/screen-printing",
     image: screenPrintingImage,
+    // Flip to true to wash the photo in brand purple, the same treatment the
+    // hero photo gets.
+    tinted: true,
   },
   {
     key: "vehicleBranding",
     href: "/gallery/vehicle-branding",
     image: vehicleBrandingImage,
+    tinted: true,
   },
   {
     key: "outdoorAdvertising",
     href: "/gallery/outdoor-advertising",
     image: outdoorAdvertisingImage,
+    tinted: true,
   },
 ] as const;
 
@@ -56,6 +61,11 @@ export async function AboutContent() {
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
           />
+          {/* Same brand-purple wash as the service photos and the hero. */}
+          <span
+            className="absolute inset-0 bg-linear-to-b from-primary/80 to-primary/40"
+            aria-hidden
+          />
         </div>
       </section>
 
@@ -72,7 +82,7 @@ export async function AboutContent() {
           </div>
 
           <div className="mt-12 flex flex-col gap-16 sm:gap-20">
-            {SERVICES.map(({ key, href, image }, index) => (
+            {SERVICES.map(({ key, href, image, tinted }, index) => (
               <article
                 key={key}
                 className="grid items-center gap-8 md:grid-cols-2 md:gap-12"
@@ -94,6 +104,12 @@ export async function AboutContent() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  {tinted && (
+                    <span
+                      className="absolute inset-0 bg-linear-to-b from-primary/80 to-primary/40"
+                      aria-hidden
+                    />
+                  )}
                 </Link>
                 <div>
                   <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
