@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     remotePatterns: supabaseHost
       ? [{ protocol: "https", hostname: supabaseHost, pathname: "/storage/v1/**" }]
       : [],
+    // Keep optimized copies for a year, matching the Cache-Control we set on upload.
+    // Safely cache for a year because we never overwrite an existing storage object.
+    minimumCacheTTL: 31536000,
   },
 };
 

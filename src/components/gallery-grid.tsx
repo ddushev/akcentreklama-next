@@ -10,6 +10,12 @@ import type { CategorySlug, GalleryImage } from "@/lib/gallery";
 import { imageUrl } from "@/lib/gallery-client";
 import { DeleteImageButton, UploadZone } from "@/components/gallery-admin";
 
+// A neutral 8x8 JPEG. Gallery images live in Supabase, so Next can't generate a
+// per-image blur the way it does for local files; this shared placeholder still
+// fills every tile immediately, so the grid fades in instead of popping in.
+const PLACEHOLDER =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDABQODxIPDRQSERIXFhQYHzMhHxwcHz8tLyUzSkFOTUlBSEZSXHZkUldvWEZIZoxob3p9hIWET2ORm4+AmnaBhH//2wBDARYXFx8bHzwhITx/VEhUf39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f3//wAARCAAIAAgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDqaKKKBn//2Q==";
+
 export function GalleryGrid({
   images,
   isAdmin = false,
@@ -62,8 +68,11 @@ export function GalleryGrid({
                 src={imageUrl(img.storage_path)}
                 alt={img.caption ?? ""}
                 fill
-                // The first row is likely on screen straight away; the rest stay lazy.
-                preload={i < 4}
+                placeholder={PLACEHOLDER}
+                // Load the first rows up front so the visible grid arrives in one
+                // go; everything below the fold stays lazy.
+                preload={i < 8}
+                loading={i < 8 ? "eager" : "lazy"}
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />

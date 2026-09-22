@@ -161,6 +161,9 @@ export function UploadZone({
           .upload(path, prepared.blob, {
             contentType: prepared.contentType,
             upsert: false,
+            // Each upload gets a unique path, so the file can be cached for a
+            // year by browsers, the CDN and Next's image optimizer.
+            cacheControl: "31536000",
           });
         if (uploadError) {
           toast.error(`${file.name}: ${uploadError.message}`);
