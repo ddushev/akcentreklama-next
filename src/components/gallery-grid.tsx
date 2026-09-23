@@ -54,7 +54,6 @@ export function GalleryGrid({
         {images.map((img, i) => (
           <div
             key={img.id}
-            // bg-muted fills the tile while the photo loads, so the grid never flashes white.
             className="group relative aspect-square overflow-hidden rounded-xl bg-muted ring-1 ring-border transition-shadow duration-200 hover:shadow-xl"
           >
             <button
