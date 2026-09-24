@@ -1,48 +1,13 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
-import {
-  ArrowRight,
-  Award,
-  BadgePercent,
-  Car,
-  Factory,
-  Megaphone,
-  Printer,
-} from "lucide-react";
+import { ArrowRight, Award, BadgePercent, Factory } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { BrandTint } from "@/components/brand-tint";
 import { ContactCta } from "@/components/contact-cta";
+import { SERVICES } from "@/lib/services";
 // Static imports let Next generate a tiny blurDataURL at build time, so the
 // hero shows a blurred preview instantly instead of an empty box while loading.
 import heroImage from "../../../public/images/hero.jpg";
-import screenPrintingImage from "../../../public/images/about-screen-printing.jpg";
-import vehicleBrandingImage from "../../../public/images/about-vehicle-branding.jpg";
-import outdoorAdvertisingImage from "../../../public/images/about-outdoor-advertising.jpg";
-
-const SERVICES = [
-  {
-    key: "screenPrinting",
-    href: "/gallery/screen-printing",
-    Icon: Printer,
-    image: screenPrintingImage,
-    // Flip to true to wash the photo in brand purple, the same treatment the
-    // hero photo gets.
-    tinted: true,
-  },
-  {
-    key: "vehicleBranding",
-    href: "/gallery/vehicle-branding",
-    Icon: Car,
-    image: vehicleBrandingImage,
-    tinted: true,
-  },
-  {
-    key: "outdoorAdvertising",
-    href: "/gallery/outdoor-advertising",
-    Icon: Megaphone,
-    image: outdoorAdvertisingImage,
-    tinted: true,
-  },
-] as const;
 
 const HIGHLIGHTS = [
   { key: "ownPrintingHouse", Icon: Factory },
@@ -129,7 +94,7 @@ export default async function HomePage({
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {SERVICES.map(({ key, href, Icon, image, tinted }) => (
+          {SERVICES.map(({ key, href, Icon, image }) => (
             <Link
               key={key}
               href={href}
@@ -144,12 +109,7 @@ export default async function HomePage({
                   sizes="(min-width: 768px) 33vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                {tinted && (
-                  <span
-                    className="absolute inset-0 bg-linear-to-b from-primary/80 to-primary/40"
-                    aria-hidden
-                  />
-                )}
+                <BrandTint />
               </div>
               <div className="relative flex flex-1 flex-col p-6 pt-10">
                 <span className="absolute -top-7 left-6 flex size-14 items-center justify-center rounded-full bg-primary text-brand-green shadow-lg ring-4 ring-card">

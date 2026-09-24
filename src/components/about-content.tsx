@@ -2,36 +2,12 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { BrandTint } from "@/components/brand-tint";
 import { ContactCta } from "@/components/contact-cta";
+import { SERVICES } from "@/lib/services";
 import { cn } from "@/lib/utils";
-// Static imports give each photo an automatic blur placeholder while it loads.
+// Static import gives the photo an automatic blur placeholder while it loads.
 import agencyImage from "../../public/images/about-agency.jpg";
-import screenPrintingImage from "../../public/images/about-screen-printing.jpg";
-import vehicleBrandingImage from "../../public/images/about-vehicle-branding.jpg";
-import outdoorAdvertisingImage from "../../public/images/about-outdoor-advertising.jpg";
-
-const SERVICES = [
-  {
-    key: "screenPrinting",
-    href: "/gallery/screen-printing",
-    image: screenPrintingImage,
-    // Flip to true to wash the photo in brand purple, the same treatment the
-    // hero photo gets.
-    tinted: true,
-  },
-  {
-    key: "vehicleBranding",
-    href: "/gallery/vehicle-branding",
-    image: vehicleBrandingImage,
-    tinted: true,
-  },
-  {
-    key: "outdoorAdvertising",
-    href: "/gallery/outdoor-advertising",
-    image: outdoorAdvertisingImage,
-    tinted: true,
-  },
-] as const;
 
 export async function AboutContent() {
   const t = await getTranslations("about");
@@ -61,11 +37,7 @@ export async function AboutContent() {
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
           />
-          {/* Same brand-purple wash as the service photos and the hero. */}
-          <span
-            className="absolute inset-0 bg-linear-to-b from-primary/80 to-primary/40"
-            aria-hidden
-          />
+          <BrandTint />
         </div>
       </section>
 
@@ -82,7 +54,7 @@ export async function AboutContent() {
           </div>
 
           <div className="mt-12 flex flex-col gap-16 sm:gap-20">
-            {SERVICES.map(({ key, href, image, tinted }, index) => (
+            {SERVICES.map(({ key, href, image }, index) => (
               <article
                 key={key}
                 className="grid items-center gap-8 md:grid-cols-2 md:gap-12"
@@ -104,12 +76,7 @@ export async function AboutContent() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  {tinted && (
-                    <span
-                      className="absolute inset-0 bg-linear-to-b from-primary/80 to-primary/40"
-                      aria-hidden
-                    />
-                  )}
+                  <BrandTint />
                 </Link>
                 <div>
                   <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">

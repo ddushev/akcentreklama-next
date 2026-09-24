@@ -9,13 +9,7 @@ export const CATEGORIES = [
 
 export type CategorySlug = (typeof CATEGORIES)[number];
 
-
-// Maps a category slug to its i18n key under the "home.services" / "gallery" namespaces.
-export const CATEGORY_I18N_KEY: Record<CategorySlug, string> = {
-  "screen-printing": "screenPrinting",
-  "vehicle-branding": "vehicleBranding",
-  "outdoor-advertising": "outdoorAdvertising",
-};
+// Per-service details (message key, icon, photo) live in lib/services.ts.
 
 export function isCategory(value: string): value is CategorySlug {
   return (CATEGORIES as readonly string[]).includes(value);

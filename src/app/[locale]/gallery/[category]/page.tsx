@@ -1,25 +1,13 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Printer, Car, Megaphone, type LucideIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { GalleryGrid } from "@/components/gallery-grid";
 import { ContactCta } from "@/components/contact-cta";
 import { getImagesByCategory } from "@/lib/gallery-data";
-import {
-  CATEGORIES,
-  CATEGORY_I18N_KEY,
-  isCategory,
-  type CategorySlug,
-} from "@/lib/gallery";
+import { CATEGORIES, isCategory } from "@/lib/gallery";
+import { SERVICES, getService } from "@/lib/services";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
-
-// Same icons the home page uses for each service, reused in the gallery nav.
-const CATEGORY_ICON: Record<CategorySlug, LucideIcon> = {
-  "screen-printing": Printer,
-  "vehicle-branding": Car,
-  "outdoor-advertising": Megaphone,
-};
 
 export function generateStaticParams() {
   return CATEGORIES.map((category) => ({ category }));
@@ -39,6 +27,7 @@ export default async function GalleryPage({
 
   const t = await getTranslations("gallery");
   const tHome = await getTranslations("home");
+  const { key: currentKey } = getService(category);
   const [images, supabase] = await Promise.all([
     getImagesByCategory(category),
     createClient(),
@@ -55,21 +44,20 @@ export default async function GalleryPage({
           {t("eyebrow")}
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-          {t(CATEGORY_I18N_KEY[category])}
+          {t(currentKey)}
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
-          {tHome(`servicesDesc.${CATEGORY_I18N_KEY[category]}`)}
+          {tHome(`servicesDesc.${currentKey}`)}
         </p>
 
         {/* Category switcher — compact pills so the photos stay the focus. */}
         <nav className="mt-8 flex flex-wrap gap-3">
-          {CATEGORIES.map((cat) => {
-            const Icon = CATEGORY_ICON[cat];
-            const isCurrent = cat === category;
+          {SERVICES.map(({ slug, key, href, Icon }) => {
+            const isCurrent = slug === category;
             return (
               <Link
-                key={cat}
-                href={`/gallery/${cat}`}
+                key={slug}
+                href={href}
                 aria-current={isCurrent ? "page" : undefined}
                 className={cn(
                   "inline-flex h-11 items-center gap-2 rounded-full border px-5 font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
@@ -82,7 +70,7 @@ export default async function GalleryPage({
                   className={cn("size-4", isCurrent && "text-brand-green")}
                   aria-hidden
                 />
-                {t(CATEGORY_I18N_KEY[cat])}
+                {t(key)}
               </Link>
             );
           })}
