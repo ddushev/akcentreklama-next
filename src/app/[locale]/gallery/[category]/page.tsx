@@ -9,6 +9,7 @@ import { SERVICES, getService } from "@/lib/services";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
+// TODO: Convert this to a static page
 export function generateStaticParams() {
   return CATEGORIES.map((category) => ({ category }));
 }
