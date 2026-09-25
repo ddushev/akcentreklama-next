@@ -1,11 +1,12 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
+import { BannerTint } from "@/components/photo-tints";
 // Static imports give each picture an automatic blur placeholder while it loads.
 import contactsImage from "../../../../public/images/contacts.jpg";
 import mapImage from "../../../../public/images/map.jpg";
 
-// The agency's Google Maps place page (without Google's session tracking params).
+// The agency's Google Maps place page.
 const MAP_LINK =
   "https://www.google.com/maps/place/SCREEN+PRINTING+-+ADVERTISING-ACCENT/@42.4909515,27.4653886,17z/data=!3m1!4b1!4m6!3m5!1s0x40a694beba699433:0x27a38c0581088405!8m2!3d42.4909476!4d27.4679635!16s%2Fg%2F11dxdcg82t";
 
@@ -38,8 +39,7 @@ export default async function ContactsPage({
           sizes="100vw"
           className="-z-10 object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-primary/85 md:bg-transparent md:bg-linear-to-r md:from-primary md:via-primary/85 md:to-primary/25" />
-
+        <BannerTint />
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="max-w-2xl">
             <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl">

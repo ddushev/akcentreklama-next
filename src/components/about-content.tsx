@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { BrandTint } from "@/components/brand-tint";
+import { BrandTint } from "@/components/photo-tints";
 import { ContactCta } from "@/components/contact-cta";
 import { SERVICES } from "@/lib/services";
 import { cn } from "@/lib/utils";

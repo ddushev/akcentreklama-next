@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ArrowRight, Award, BadgePercent, Factory } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { BrandTint } from "@/components/brand-tint";
+import { BannerTint, BrandTint } from "@/components/photo-tints";
 import { ContactCta } from "@/components/contact-cta";
 import { SERVICES } from "@/lib/services";
 // Static imports let Next generate a tiny blurDataURL at build time, so the
@@ -38,8 +38,7 @@ export default async function HomePage({
           sizes="100vw"
           className="-z-10 object-cover"
         />
-        {/* Solid tint on mobile; on wider screens fade from the text side so the photo shows on the right. */}
-        <div className="absolute inset-0 -z-10 bg-primary/85 md:bg-transparent md:bg-linear-to-r md:from-primary md:via-primary/85 md:to-primary/25" />
+        <BannerTint />
 
         <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:py-32">
           <div className="max-w-2xl">
