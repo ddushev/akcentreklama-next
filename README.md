@@ -28,9 +28,10 @@ https://github.com/user-attachments/assets/15e2024d-8419-425f-add9-9377e11d46f9
 - **Performance.** `next/image` with build-time blur placeholders and responsive `sizes`, one-year
   caching for gallery images, eager loading only above the fold, and a static map image instead of
   a third-party Google Maps embed.
-- **Safe migration from the old site.** Permanent redirects in `next.config.ts` send the old site's
-  URLs (including their `.html` forms) to the new pages, so existing links and search rankings carry
-  over. They run before the i18n middleware, which would otherwise 404 those paths.
+- **Safe migration from the old site.** Permanent redirects send the old site's URLs (including their
+  `.html` forms) to the new pages, so existing links and search rankings carry over. One shared list
+  drives both the middleware and `next.config.ts`, because on Netlify the i18n middleware runs first
+  and would otherwise 404 those paths.
 
 ## Tech stack
 

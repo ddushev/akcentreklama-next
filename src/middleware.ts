@@ -1,11 +1,21 @@
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { createServerClient } from "@supabase/ssr";
 import { routing } from "@/i18n/routing";
+import { LEGACY_REDIRECTS } from "@/lib/legacy-redirects";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
 export async function middleware(request: NextRequest) {
+  // 0. Old-site URLs redirect before next-intl can rewrite them to a missing
+  //    /bg/... page (see lib/legacy-redirects.ts).
+  const legacyTarget = LEGACY_REDIRECTS[request.nextUrl.pathname];
+  if (legacyTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = legacyTarget;
+    return NextResponse.redirect(url, 308);
+  }
+
   // 1. Run the next-intl middleware first — it handles locale detection and
   //    produces the response (with any locale redirect/rewrite applied).
   const response = intlMiddleware(request);
